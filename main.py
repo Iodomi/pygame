@@ -39,13 +39,20 @@ class Main:
         pygame.display.update()
         self.clock.tick(60)
 
-    def run(self) -> None:
+    def run(self) -> None: # this function can handle game events in runtime
         while self.running:
+            # ingame rendering
+
             self.display.fill("light blue")
 
             self.player.render(self.display)
 
             self.screen.blit(pygame.transform.scale(self.display, self.screen.get_size()), (0, 0))
+
+            self.update()
+            self.render()
+
+            # ingame events
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -65,9 +72,6 @@ class Main:
 
             if keys[pygame.K_ESCAPE]:
                 self.load()
-
-            self.update()
-            self.render()
     
     def terminate(self) -> None:
         self.running = False
